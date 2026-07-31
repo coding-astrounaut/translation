@@ -4,8 +4,11 @@ import OpenAI from 'openai';
 const app = express();
 app.use(express.json());
 
+const apiKey = process.env.OPENROUTER_API_KEY;
+
+
 const openai = new OpenAI({
-    apiKey: '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',
+    apiKey,
     baseURL: 'https://openrouter.ai/api/v1',
 })
 
