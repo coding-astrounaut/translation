@@ -1,14 +1,13 @@
 import express from 'express';
 import OpenAI from 'openai';
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
-
-const apiKey = process.env.OPENROUTER_API_KEY;
-
+app.use(cors());
 
 const openai = new OpenAI({
-    apiKey,
+    apiKey: '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',
     baseURL: 'https://openrouter.ai/api/v1',
 })
 
@@ -29,6 +28,11 @@ app.post('/api/translate', async (req, res) => {
     messages.push ({
         role: 'system',
         content: `content": "The selected target language for the next response is: ${userLanguage }`
+    })
+
+    messages.push({
+        role: 'user',
+        content: userPrompt
     })
 
     try {
